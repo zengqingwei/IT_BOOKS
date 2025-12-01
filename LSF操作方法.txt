@@ -1,0 +1,44 @@
+# 1. 第一次完整克隆（推荐所有人这么做）
+git clone git@github.com:zengqingwei/IT_BOOKS.git
+cd IT_BOOKS
+
+# 2. 如果已经克隆过旧版本，需要先安装并初始化 LFS（只做一次）
+git lfs install
+
+# 3. 拉取所有大文件（只在第一次或有人删了 .git/lfs 才需要）
+git lfs pull
+
+# 4. 以后日常更新（所有人每天都只用这一条）
+git pull
+========================================
+
+【IT_BOOKS 电子书仓库同步方式】
+
+1. 第一次克隆（所有人必须先执行）：
+   git clone git@github.com:zengqingwei/IT_BOOKS.git
+   cd IT_BOOKS
+   git lfs install
+   git lfs pull        # 这步会把 Large_files 里所有大书下载下来（总共几GB）
+
+2. 以后每天更新只用一条命令：
+   git pull            # 小书直接更新，大书只下载有变动的
+
+注意：
+- 小于100MB的书直接放在任意文件夹
+- 大于100MB的书必须放 Large_files 文件夹（否则会超 GitHub 限制）
+- 不想下载大书？只执行 git clone + cd 就行（只占几十MB空间）
+=================================================
+操作场景,命令（直接复制粘贴就行）
+1. 新增/修改普通小 PDF（<100MB）,"随便扔到任意文件夹（除了 Large_files）
+git add .
+git commit -m ""更新书籍""
+git push"
+
+2. 新增大 PDF（>100MB）,"必须扔到 Large_files/ 或它的子文件夹里
+git add Large_files/xxx.pdf
+git commit -m ""添加大书""
+git push（会自动走 LFS 上传）"
+
+3. 拉取最新代码（日常更新）,
+git pull（自动把小文件直接下载，大文件走 LFS 指针）
+=================================================
