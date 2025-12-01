@@ -1,6 +1,9 @@
-# Auto detect text files and perform LF normalization
 * text=auto
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.pdf !text !filter !merge !diff
+
+# 只让 Large_files 文件夹及其子目录下的所有文件走 LFS（最推荐）
 Large_files/** filter=lfs diff=lfs merge=lfs -text
+# 明确让其他所有 PDF 不走 LFS（防止误伤）
+**/*.pdf -filter=lfs
+*.pdf !text !filter !merge !diff
 Large_files/**/*.pdf filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
